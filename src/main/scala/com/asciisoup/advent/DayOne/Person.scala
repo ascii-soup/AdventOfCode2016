@@ -19,14 +19,16 @@ case class Person(var facing: Orientation.Value, origin: Point) {
     _location
   }
 
-  def turnRightAndWalkForward (steps: Int): Unit = {
-    facing = directions.next
-    walkForward(steps)
-  }
-
-  def turnLeftAndWalkForward (steps: Int): Unit = {
-    facing = directions.prev
-    walkForward(steps)
+  def follow (instructions: List[Instruction]): Unit = {
+    instructions.foreach(
+      (instruction) => {
+        instruction.direction match {
+          case Direction.Left => facing = directions.prev
+          case Direction.Right => facing = directions.next
+        }
+        walkForward(instruction.steps)
+      }
+    )
   }
 
   private def walkForward (steps: Int): Unit = {
