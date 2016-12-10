@@ -17,7 +17,7 @@ class PointTest extends FlatSpec with Matchers {
     point.y should be (2)
   }
 
-  "A Point" should "support subtraction from another Point" in {
+  "A Point" can "be subtracted from another Point" in {
     val pointA = Point(1, 2)
     val pointB = Point(1, 1)
 
