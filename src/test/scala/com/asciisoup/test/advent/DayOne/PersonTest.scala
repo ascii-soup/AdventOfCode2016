@@ -37,4 +37,10 @@ class PersonTest extends FlatSpec with Matchers {
     person follow List(Instruction(Direction.Left, 1))
     person.location should be (Point(2, 8))
   }
+
+  "A Person" can "be observed during their route" in {
+    val person = Person(Orientation.North, Point(0, 0))
+    person.observedBy((location: Point) => location should be(Point(1, 0)))
+    person follow List(Instruction(Direction.Right, 1))
+  }
 }
