@@ -24,6 +24,13 @@ class PointTest extends FlatSpec with Matchers {
     (pointA - pointB) should be (Point(0, 1))
   }
 
+  "A Point" should "support addition to another Point" in {
+    val pointA = Point(1, 2)
+    val pointB = Point(1, 1)
+
+    (pointA + pointB) should be (Point(2, 3))
+  }
+
   "A Point" should "support giving its absolute value" in {
     val point = Point(-1, -2)
     point.abs should be (Point(1, 2))

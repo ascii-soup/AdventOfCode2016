@@ -24,6 +24,16 @@ case class Point(x: Int, y: Int) {
   }
 
   /**
+    * Add two Points together
+    *
+    * @param point The Point to add to this Point
+    * @return
+    */
+  def + (point: Point): Point = {
+    Point(this.x + point.x, this.y + point.y)
+  }
+
+  /**
     * The absolute value of this Point
     *
     * @return
