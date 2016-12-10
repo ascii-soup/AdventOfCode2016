@@ -6,10 +6,10 @@
 
 package com.asciisoup.advent.DayOne
 
-case class Person(var facing: Direction.Value, origin: Point) {
+case class Person(var facing: Orientation.Value, origin: Point) {
 
   val directions = CircularList(
-    List(Direction.North, Direction.East, Direction.South, Direction.West),
+    List(Orientation.North, Orientation.East, Orientation.South, Orientation.West),
     facing
   )
 
@@ -31,10 +31,10 @@ case class Person(var facing: Direction.Value, origin: Point) {
 
   private def walkForward (steps: Int): Unit = {
     _location += (facing match {
-      case Direction.North => Point(0, steps)
-      case Direction.East  => Point(steps, 0)
-      case Direction.South => Point(0, -steps)
-      case Direction.West  => Point(-steps, 0)
+      case Orientation.North => Point(0, steps)
+      case Orientation.East  => Point(steps, 0)
+      case Orientation.South => Point(0, -steps)
+      case Orientation.West  => Point(-steps, 0)
     })
   }
 }

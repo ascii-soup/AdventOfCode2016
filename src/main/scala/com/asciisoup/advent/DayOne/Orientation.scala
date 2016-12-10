@@ -6,7 +6,7 @@
 
 package com.asciisoup.advent.DayOne
 
-object Direction extends Enumeration {
+object Orientation extends Enumeration {
   val North = Value("N")
   val East = Value("E")
   val South = Value("S")
