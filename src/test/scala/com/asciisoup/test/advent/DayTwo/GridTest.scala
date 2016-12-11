@@ -6,19 +6,30 @@
 
 package com.asciisoup.test.advent.DayTwo
 
-import com.asciisoup.advent.DayTwo.{Dimensions, Grid}
+import com.asciisoup.advent.DayTwo.{Dimensions, FilledCell, Grid}
 import org.scalatest.{FlatSpec, Matchers}
 
 class GridTest extends FlatSpec with Matchers {
 
   "A Grid" should "create a 2D list of Ints" in {
-    val grid = Grid(Dimensions(2, 2))
-    grid.toList should be (List(List(1, 2), List(3, 4)))
+    val grid = Grid.fromDimensions(Dimensions(2, 2))
+    grid.toList should be (
+      List(
+        List(FilledCell("1"), FilledCell("2")),
+        List(FilledCell("3"), FilledCell("4"))
+      )
+    )
   }
 
   "A Grid" can "generated lists of many sizes" in {
-    val grid = Grid(Dimensions(3, 3))
-    grid.toList should be (List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val grid = Grid.fromDimensions(Dimensions(3, 3))
+    grid.toList should be (
+      List(
+        List(FilledCell("1"), FilledCell("2"), FilledCell("3")),
+        List(FilledCell("4"), FilledCell("5"), FilledCell("6")),
+        List(FilledCell("7"), FilledCell("8"), FilledCell("9"))
+      )
+    )
   }
 
 }

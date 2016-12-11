@@ -11,7 +11,7 @@ import scala.io.Source
 object Puzzle extends App {
   val input = Source.fromInputStream(getClass.getResourceAsStream("/day_two.txt"))
 
-  val keypad = Keypad(Dimensions(3, 3), 5)
+  val keypad = Keypad(Grid.fromDimensions(Dimensions(3, 3)), "5")
   for (line <- input.getLines()) {
     for (s <- line.toList) {
       keypad.move(Direction.withName(s.toString.toUpperCase()))

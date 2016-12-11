@@ -6,25 +6,46 @@
 
 package com.asciisoup.advent.DayTwo
 
-case class Grid (dimensions: Dimensions) {
+object Grid {
 
-  type Row = List[Int]
-  type Grid = List[Row]
+  type Row = List[Cell]
 
-  private def makeRow(width: Int, multiplier: Int): Row = {
-    (1 to width)
-      .map(x => x + (width * multiplier))
-      .toList
-  }
+  def fromDimensions(dimensions: Dimensions): Grid = {
+    def makeRow(width: Int, multiplier: Int): Row = {
+      (1 to width)
+        .map(x => FilledCell((x + (width * multiplier)).toString))
+        .toList
+    }
 
-  private def makeGrid (dimensions: Dimensions): Grid = {
-    (0 until dimensions.height)
+    val grid = (0 until dimensions.height)
       .map(y => makeRow(dimensions.width, y))
       .toList
+
+    new Grid(grid)
   }
 
-  def toList: Grid = {
-    makeGrid(dimensions)
+}
+
+class Grid (cells: List[List[Cell]]) {
+  def toList: List[List[Cell]] = cells
+
+  def cellAt(point: Point): Cell = {
+    try {
+      cells(point.y)(point.x)
+    } catch {
+      case e: IndexOutOfBoundsException => new EmptyCell
+      case e: Exception => throw e
+    }
   }
 
+  def find(value: String): Point = {
+    for (y <- cells.indices) {
+      for (x <- cells(y).indices) {
+        if (cells(y)(x).value == value) {
+          return Point(x, y)
+        }
+      }
+    }
+    throw new ArrayIndexOutOfBoundsException(value + " cannot be found in the grid")
+  }
 }
